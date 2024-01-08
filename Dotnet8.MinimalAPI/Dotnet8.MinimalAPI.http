@@ -1,6 +1,6 @@
 @Dotnet8_MinimalAPI_HostAddress = http://localhost:5296
 
-GET {{Dotnet8_MinimalAPI_HostAddress}}/weatherforecast/
+GET {{Dotnet8_MinimalAPI_HostAddress}}/weather/forecast
 Accept: application/json
 
 ###
