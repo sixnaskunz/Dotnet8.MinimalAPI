@@ -1,3 +1,5 @@
+using Dotnet8.MinimalAPI;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,6 +34,7 @@ string[] summaries =
 RouteGroupBuilder weatherGroup = app.MapGroup("/weather");
 weatherGroup.MapGet("/forecast", Forecast(summaries));
 weatherGroup.MapGet("/forecast2", (ILogger<WeatherForecast> logger) => Forecast2(summaries, logger));
+weatherGroup.MapGet("/forecast3", (ILogger<WeatherForecast> logger) => WeatherService.Forecast3(summaries, logger));
 
 // app.MapKycEndpoints();
 

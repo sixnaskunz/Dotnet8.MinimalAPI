@@ -10,3 +10,8 @@ GET {{BaseUrl_Https}}/weather/forecast2
 Accept: application/json
 
 ### DI passing to method
+
+GET {{BaseUrl_Https}}/weather/forecast3
+Accept: application/json
+
+### Seperate file and use DI passing to method
