@@ -31,8 +31,18 @@ string[] summaries =
 
 RouteGroupBuilder weatherGroup = app.MapGroup("/weather");
 weatherGroup.MapGet("/forecast", Forecast(summaries));
-weatherGroup.MapGet("/forecast2", Forecast(summaries));
-weatherGroup.MapGet("/forecast3", Forecast(summaries));
+weatherGroup.MapGet("/forecast2", (ILogger<WeatherForecast> logger) => Forecast2(summaries, logger));
+
+// app.MapKycEndpoints();
+
+// RouteGroupBuilder kycGroup = app.MapGroup("v2/kyc");
+
+// kycGroup.MapGet("/temp", Results<Ok<KycResponse>, NotFound> () =>
+// {
+//     KycResponse temp = new();
+//     return temp is not null ? TypedResults.Ok(temp) : TypedResults.NotFound();
+// })
+// .WithOpenApi();
 
 app.Run();
 
@@ -50,4 +60,18 @@ static Func<WeatherForecast[]> Forecast(string[] summaries)
             .ToArray();
         return forecast;
     };
+}
+
+static WeatherForecast[] Forecast2(string[] summaries, ILogger<WeatherForecast> logger)
+{
+    WeatherForecast[] forecast = Enumerable.Range(1, 5).Select(index =>
+           new WeatherForecast
+           (
+               DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+               Random.Shared.Next(-20, 55),
+               summaries[Random.Shared.Next(summaries.Length)]
+           ))
+           .ToArray();
+    logger.LogInformation("LogInfo: {forcast}", forecast);
+    return forecast;
 }
