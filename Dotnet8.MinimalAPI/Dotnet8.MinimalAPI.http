@@ -15,3 +15,7 @@ GET {{BaseUrl_Https}}/weather/forecast3
 Accept: application/json
 
 ### Seperate file and use DI passing to method
+
+GET {{BaseUrl_Https}}/forecast-internal-assembly
+
+## use DI passing to method (Internal Assembly)

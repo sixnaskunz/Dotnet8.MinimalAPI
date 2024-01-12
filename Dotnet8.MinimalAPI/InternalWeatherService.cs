@@ -1,11 +1,11 @@
 namespace Dotnet8.MinimalAPI;
 
-internal static class WeatherService
+internal static class InternalWeatherService
 {
-    internal static WeatherForecast[] Forecast3(string[] summaries, ILogger<WeatherForecast> logger)
+    internal static InternalWeatherForecast[] InternalAssemblyForecast(string[] summaries, ILogger<InternalWeatherForecast> logger)
     {
-        WeatherForecast[] forecast = Enumerable.Range(1, 5).Select(index =>
-               new WeatherForecast
+        InternalWeatherForecast[] forecast = Enumerable.Range(1, 5).Select(index =>
+               new InternalWeatherForecast
                (
                    DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                    Random.Shared.Next(-20, 55),

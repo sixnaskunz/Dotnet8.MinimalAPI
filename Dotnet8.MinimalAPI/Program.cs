@@ -33,19 +33,10 @@ string[] summaries =
 
 RouteGroupBuilder weatherGroup = app.MapGroup("/weather");
 weatherGroup.MapGet("/forecast", Forecast(summaries));
+//? มีปัญหา ILogger ไม่สามารถ pass static class เข้าไปใน TGeneric ได้
 weatherGroup.MapGet("/forecast2", (ILogger<WeatherForecast> logger) => Forecast2(summaries, logger));
 weatherGroup.MapGet("/forecast3", (ILogger<WeatherForecast> logger) => WeatherService.Forecast3(summaries, logger));
-
-// app.MapKycEndpoints();
-
-// RouteGroupBuilder kycGroup = app.MapGroup("v2/kyc");
-
-// kycGroup.MapGet("/temp", Results<Ok<KycResponse>, NotFound> () =>
-// {
-//     KycResponse temp = new();
-//     return temp is not null ? TypedResults.Ok(temp) : TypedResults.NotFound();
-// })
-// .WithOpenApi();
+weatherGroup.MapGet("/forecast-internal-assembly", (ILogger<InternalWeatherForecast> logger) => InternalWeatherService.InternalAssemblyForecast(summaries, logger));
 
 app.Run();
 
