@@ -1,10 +1,14 @@
-using Dotnet8.MinimalAPI;
-
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Learn more about configuring ProblemDetails at https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#problem-details
+builder.Services.AddProblemDetails();
+
+// Learn more about configuring ProblemDetails at https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#iexceptionhandler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // ConfigureHttpJsonOptions Docs: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses?view=aspnetcore-8.0#configure-json-serialization-options-globally
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -24,7 +28,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Learn more about configuring UseHttpsRedirection at https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-8.0&tabs=visual-studio%2Clinux-ubuntu#usehttpsredirection
 app.UseHttpsRedirection();
+
+// Learn more about configuring UseStatusCodePages at https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#usestatuscodepages
+app.UseStatusCodePages();
+
+// Learn more about configuring UseExceptionHandler at https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0#exception-handler-page
+app.UseExceptionHandler();
 
 string[] summaries =
 [
@@ -44,14 +55,8 @@ static Func<WeatherForecast[]> Forecast(string[] summaries)
 {
     return () =>
     {
-        WeatherForecast[] forecast = Enumerable.Range(1, 5).Select(index =>
-            new WeatherForecast
-            (
-                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                summaries[Random.Shared.Next(summaries.Length)]
-            ))
-            .ToArray();
+        WeatherForecast[] forecast = null;
+        forecast.ToArray();
         return forecast;
     };
 }
