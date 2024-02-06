@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dotnet8.MinimalAPI.Shared\Dotnet8.MinimalAPI.Shared.csproj" />
+    <Content Include="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="appsettings.*.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

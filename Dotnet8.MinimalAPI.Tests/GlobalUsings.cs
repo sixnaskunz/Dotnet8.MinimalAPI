@@ -1,2 +1,9 @@
+global using Dotnet8.MinimalAPI.Shared;
+global using Microsoft.AspNetCore.Diagnostics;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.Logging;
 global using NSubstitute;
+global using System.Diagnostics;
+global using System.Text.Json;
 global using Xunit;
